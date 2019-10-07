@@ -1,0 +1,12 @@
+---
+# vars file for mfitbs-openvpn-pcclient
+
+#easyrsa cert repo path
+PKI_DIR: /root/pki
+
+#easyrsa script path
+EASY_RSA_BIN: /root/easy-rsa
+
+EASY_RSA_ARCH_DIR: EasyRSA-v3.0.6
+
+LOCAL_REPO: target

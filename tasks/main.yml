@@ -1,0 +1,5 @@
+---
+# tasks file for mfitbs-openvpn-pcclient
+- name: Provision pcclients
+  import_tasks: client.yml
+  when: inventory_hostname == easy_rsa_host
