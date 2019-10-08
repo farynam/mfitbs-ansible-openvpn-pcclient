@@ -13,21 +13,21 @@
 - name: Grab client cert locally
   fetch:
     src: "{{PKI_DIR}}/issued/{{ item }}.crt"
-    dest: "{{ LOCAL_REPO }}/clients/issued/"
+    dest: "{{ local_repo }}/clients/issued/"
     flat: yes
   with_items: "{{ clients }}"
 
 - name: Grab keys locally
   fetch:
     src: "{{PKI_DIR}}/private/{{ item }}.key"
-    dest: "{{ LOCAL_REPO }}/clients/private/"
+    dest: "{{ local_repo }}/clients/private/"
     flat: yes
   with_items: "{{ clients }}"
 
 - name: Create local clients conf directory
   local_action:
     module: file
-    path: "{{ LOCAL_REPO }}/clients/conf"
+    path: "{{ local_repo }}/clients/conf"
     state: directory
     mode: '0770'
 
@@ -35,12 +35,12 @@
   local_action:
     module: template
     src: templates/client.conf
-    dest: "{{ LOCAL_REPO }}/clients/conf/{{ item }}.conf"
+    dest: "{{ local_repo }}/clients/conf/{{ item }}.conf"
     mode: '0660'
     force : false
   vars:
-    ca_cert: "{{ lookup('file', '{{ LOCAL_REPO }}/ca.crt') }}"
-    client_cert: "{{ lookup('file', '{{ LOCAL_REPO }}/clients/issued/' ~ item ~ '.crt') }}"
-    client_key: "{{ lookup('file',  '{{ LOCAL_REPO }}/clients/private/' ~ item ~ '.key') }}"
-    ta_key: "{{ lookup('file',  '{{ LOCAL_REPO }}/ta.key') }}"
+    ca_cert: "{{ lookup('file', '{{ local_repo }}/ca.crt') }}"
+    client_cert: "{{ lookup('file', '{{ local_repo }}/clients/issued/' ~ item ~ '.crt') }}"
+    client_key: "{{ lookup('file',  '{{ local_repo }}/clients/private/' ~ item ~ '.key') }}"
+    ta_key: "{{ lookup('file',  '{{ local_repo }}/ta.key') }}"
   with_items: "{{ clients }}"

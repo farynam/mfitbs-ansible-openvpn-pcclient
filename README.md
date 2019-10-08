@@ -14,7 +14,6 @@ Role Variables
 --------------
 
 * server_port - ex. 1194
-* server_host - ex. 192.168.51.4
 * proto: tcp
 * cipher - ex. AES-256-CBC
 * id_type - ex. IP or UDP
@@ -59,7 +58,7 @@ Example Playbook
           
                 server_port: 1194
             
-                server_host: 192.168.51.4
+                groups['server'][0]: 192.168.51.4
             
                 proto: tcp
             
